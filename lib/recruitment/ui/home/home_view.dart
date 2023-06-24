@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/ui/profile/profile_view.dart';
 
 import '../../../security/data/remote/models/user.dart';
 
@@ -21,8 +22,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text(widget.user.id.toString())),
-    );
+    return Scaffold(body: ProfileView());
   }
 }
