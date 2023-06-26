@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_recruitech_flutter_v2/recruitment/ui/home/home_view.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/ui/main_view.dart';
 import 'package:frontend_recruitech_flutter_v2/shared/ui/widgets/body_medium.dart';
 import 'package:frontend_recruitech_flutter_v2/shared/ui/widgets/title_large.dart';
 import 'package:page_transition/page_transition.dart';
@@ -53,8 +54,8 @@ class _LoginViewState extends State<LoginView> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeView(
-                  user: res,
+                builder: (context) => MainView(
+                  currentUser: res,
                 ),
               ),
               (route) => false);

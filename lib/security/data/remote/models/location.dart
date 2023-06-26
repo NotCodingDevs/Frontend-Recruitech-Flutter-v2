@@ -16,4 +16,10 @@ class Location {
       location: json['locationName'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": city,
+        "locationName": location,
+      };
 }
