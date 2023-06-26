@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_recruitech_flutter_v2/recruitment/ui/profile/profile_view.dart';
-import 'package:frontend_recruitech_flutter_v2/security/ui/login/login_view.dart';
-import 'package:frontend_recruitech_flutter_v2/security/ui/register/register_view.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/ui/main_view.dart';
+import 'package:frontend_recruitech_flutter_v2/security/data/remote/models/user.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +19,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      home: const ProfileView(),
+      home: MainView(
+        currentUser: User(id: 1, username: '', email: '', jwtToken: ''),
+      ),
     );
   }
 }

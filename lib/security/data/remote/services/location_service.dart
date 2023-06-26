@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class LocationService {
   final String LOCATION_ENDPOINT =
-      "https://spring-app-recruitech.bluewave-aef3079f.eastus.azurecontainerapps.io/api/v1/locations";
+      "http://192.168.241.55:8080/api/v1/locations";
 
   Future<List<Location>> fetchAllLocations() async {
     http.Response response = await http.get(
