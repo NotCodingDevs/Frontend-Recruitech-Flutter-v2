@@ -34,7 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   font_awesome_flutter: ^10.4.0
-  http: ^1.0.0
+  http: ^0.13.0
   image_picker: ^0.8.9
   intl: ^0.17.0
   page_transition: ^2.0.9
