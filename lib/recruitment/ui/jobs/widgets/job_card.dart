@@ -30,7 +30,7 @@ class _JobCardState extends State<JobCard> {
                 'http://192.168.241.55:8080/api/v1/files/images/default_profile.png',
                 height: 64.0,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 24.0,
               ),
               Column(
@@ -39,65 +39,65 @@ class _JobCardState extends State<JobCard> {
                   Text(
                     widget.job.title,
                     overflow: TextOverflow.fade,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF0C1E38),
                       fontSize: 17.0,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 2.0,
                   ),
                   Text(
                     '${widget.job.company.name} - ${widget.job.company.location.location}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF465468),
                       fontSize: 15.0,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4.0,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.business_center_outlined,
                         size: 18.0,
                         color: Color(0xFF465468),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4.0,
                       ),
                       Text(
                         widget.job.type,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: 'Gilroy',
                             fontWeight: FontWeight.w500,
                             fontSize: 14.0,
                             color: Color(0xFF465468)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12.0,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.monetization_on_outlined,
                         size: 18.0,
                         color: Color(0xFF465468),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4.0,
                       ),
-                      Text(
+                      const Text(
                         '11000',
                         style: TextStyle(
                             fontFamily: 'Gilroy',
                             fontWeight: FontWeight.w500,
                             fontSize: 14.0,
-                            color: const Color(0xFF465468)),
+                            color: Color(0xFF465468)),
                       ),
                     ],
                   )
