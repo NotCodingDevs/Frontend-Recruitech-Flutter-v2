@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_recruitech_flutter_v2/profile/data/remote/models/developer.dart';
 import 'package:frontend_recruitech_flutter_v2/profile/data/remote/services/profile_service.dart';
@@ -9,12 +10,15 @@ import 'package:frontend_recruitech_flutter_v2/profile/ui/developer_profile/widg
 import 'package:frontend_recruitech_flutter_v2/profile/ui/developer_profile/widgets/experience_card.dart';
 import 'package:frontend_recruitech_flutter_v2/profile/ui/developer_profile/widgets/profile_picture_dialog.dart';
 
+import '../../../security/data/remote/models/user.dart';
 import '../../../shared/ui/theme/text_styles.dart';
 
 class DeveloperProfileView extends StatefulWidget {
-  const DeveloperProfileView({super.key, required this.developer});
+  const DeveloperProfileView(
+      {super.key, required this.developer, required this.user});
 
   final Developer developer;
+  final User user;
 
   @override
   State<DeveloperProfileView> createState() => _DeveloperProfileViewState();
@@ -31,6 +35,16 @@ class _DeveloperProfileViewState extends State<DeveloperProfileView>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     profileService = ProfileService();
+
+    initialize();
+  }
+
+  initialize() {
+    if (widget.developer.userId == widget.user.id) {
+      setState(() {
+        isMyProfile = true;
+      });
+    }
   }
 
   @override
@@ -39,7 +53,15 @@ class _DeveloperProfileViewState extends State<DeveloperProfileView>
 
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [
+          Visibility(
+            visible: isMyProfile,
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.exit_to_app),
+            ),
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -61,15 +83,13 @@ class _DeveloperProfileViewState extends State<DeveloperProfileView>
                 right: 0,
                 top: 0,
                 child: Container(
-                  width: double.infinity,
+                  width: size.width,
                   height: size.height * 0.25,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        widget.developer.backgroundPicture,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: widget.developer.backgroundPicture,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
               ),
@@ -92,8 +112,8 @@ class _DeveloperProfileViewState extends State<DeveloperProfileView>
                         '${widget.developer.firstName} ${widget.developer.lastName}',
                         style: CustomTextStyle.titleSmall,
                       ),
-                      const Text(
-                        'Flutter Developer',
+                      Text(
+                        widget.developer.occupation,
                         style: TextStyle(
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.w500,
@@ -413,7 +433,7 @@ class _DeveloperProfileViewState extends State<DeveloperProfileView>
                 visible: isMyProfile,
                 child: Positioned(
                   right: size.width * 0.05,
-                  top: size.height * 0.44,
+                  top: size.height * 0.40,
                   child: IconButton(
                     iconSize: 24,
                     onPressed: () async {

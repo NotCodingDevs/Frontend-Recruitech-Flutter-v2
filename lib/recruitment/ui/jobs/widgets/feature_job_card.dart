@@ -2,49 +2,42 @@ import 'package:flutter/material.dart';
 
 import '../../../data/models/job.dart';
 
-class JobCard extends StatefulWidget {
-  const JobCard({super.key, required this.job});
+class FeatureJobCard extends StatelessWidget {
+  const FeatureJobCard({super.key, required this.job});
   final Job job;
 
-  @override
-  State<JobCard> createState() => _JobCardState();
-}
-
-class _JobCardState extends State<JobCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      color: Color(0xFFF8FAFB),
-      margin: EdgeInsets.symmetric(vertical: 10),
-      elevation: 0,
+      color: Colors.indigo,
+      margin: EdgeInsets.only(right: 10.0),
+      elevation: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 12.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.network(
-                widget.job.company.profilePicture,
+                job.company.profilePicture,
                 height: 64.0,
-                width: 64.0,
-                fit: BoxFit.cover,
               ),
               SizedBox(
                 width: 24.0,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    widget.job.title,
+                    job.title,
                     overflow: TextOverflow.fade,
                     style: TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF0C1E38),
+                      color: Colors.white,
                       fontSize: 17.0,
                     ),
                   ),
@@ -52,11 +45,11 @@ class _JobCardState extends State<JobCard> {
                     height: 2.0,
                   ),
                   Text(
-                    '${widget.job.company.name} - ${widget.job.company.location.location}',
+                    '${job.company.name} - ${job.company.location.location}',
                     style: TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF465468),
+                      color: Colors.white,
                       fontSize: 15.0,
                     ),
                   ),
@@ -69,18 +62,18 @@ class _JobCardState extends State<JobCard> {
                       Icon(
                         Icons.business_center_outlined,
                         size: 18.0,
-                        color: Color(0xFF465468),
+                        color: Colors.white,
                       ),
                       SizedBox(
                         width: 4.0,
                       ),
                       Text(
-                        widget.job.type,
+                        job.type,
                         style: TextStyle(
                             fontFamily: 'Gilroy',
                             fontWeight: FontWeight.w500,
                             fontSize: 14.0,
-                            color: Color(0xFF465468)),
+                            color: Colors.white),
                       ),
                       SizedBox(
                         width: 12.0,
@@ -88,18 +81,18 @@ class _JobCardState extends State<JobCard> {
                       Icon(
                         Icons.monetization_on_outlined,
                         size: 18.0,
-                        color: Color(0xFF465468),
+                        color: Colors.white,
                       ),
                       SizedBox(
                         width: 4.0,
                       ),
                       Text(
-                        widget.job.renumeration,
+                        job.renumeration,
                         style: TextStyle(
                             fontFamily: 'Gilroy',
                             fontWeight: FontWeight.w500,
                             fontSize: 14.0,
-                            color: const Color(0xFF465468)),
+                            color: Colors.white),
                       ),
                     ],
                   )

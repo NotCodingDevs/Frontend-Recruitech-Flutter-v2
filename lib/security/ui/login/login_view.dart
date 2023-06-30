@@ -64,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('ta mal mano u.u'),
+              content: Text('Email or password is incorrect'),
             ),
           );
         }
@@ -98,8 +98,7 @@ class _LoginViewState extends State<LoginView> {
                       height: 12.0,
                     ),
                     TitleLarge(text: "Sign In"),
-                    BodyMedium(
-                        text: "Entra mano entra que la chamba te espera"),
+                    BodyMedium(text: "Find jobs recommended for you"),
                     const SizedBox(
                       height: 16.0,
                     ),

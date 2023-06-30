@@ -22,7 +22,7 @@ class ExperienceCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.network(
-                'http://192.168.241.55:8080/api/v1/files/images/default_profile.png',
+                experience.company.profilePicture,
                 height: 64.0,
               ),
               SizedBox(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/data/services/job_service.dart';
 
 import '../../../shared/ui/theme/text_styles.dart';
 import '../../data/models/job.dart';
 
 class JobInformationView extends StatefulWidget {
-  const JobInformationView({super.key, required this.job});
+  const JobInformationView(
+      {super.key, required this.job, required this.developerId});
+  final int developerId;
   final Job job;
 
   @override
@@ -12,6 +15,12 @@ class JobInformationView extends StatefulWidget {
 }
 
 class _JobInformationViewState extends State<JobInformationView> {
+  JobService jobService = JobService();
+
+  Future<void> applyJob(int developerId, int jobId) async {
+    await jobService.applyToJob(developerId, jobId);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -155,6 +164,17 @@ class _JobInformationViewState extends State<JobInformationView> {
                               color: Color(0xFF0C1E38),
                             ),
                           ),
+                          SizedBox(
+                            height: 4.0,
+                          ),
+                          Text(
+                            widget.job.skillsDescription,
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15.0,
+                                color: const Color(0xFF465468)),
+                          ),
                         ],
                       ),
                     )
@@ -167,7 +187,7 @@ class _JobInformationViewState extends State<JobInformationView> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  'http://192.168.241.55:8080/api/v1/files/images/default_profile.png',
+                  widget.job.company.profilePicture,
                   height: size.width * 0.25,
                   width: size.width * 0.25,
                   fit: BoxFit.cover,
@@ -184,7 +204,10 @@ class _JobInformationViewState extends State<JobInformationView> {
                         backgroundColor: Color(0xFF2F4897),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0))),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await applyJob(widget.developerId, widget.job.id);
+                      Navigator.of(context).pop(widget.job);
+                    },
                     child: Text(
                       'Apply for this Job',
                       style: CustomTextStyle.buttonText,

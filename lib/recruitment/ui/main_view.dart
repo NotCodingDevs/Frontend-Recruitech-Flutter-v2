@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend_recruitech_flutter_v2/profile/data/remote/services/profile_service.dart';
 import 'package:frontend_recruitech_flutter_v2/recruitment/ui/home/home_view.dart';
 import 'package:frontend_recruitech_flutter_v2/recruitment/ui/jobs/jobs_view.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/ui/notifications/notifications_view.dart';
+import 'package:frontend_recruitech_flutter_v2/recruitment/ui/social/NetworkView.dart';
 
 import '../../profile/data/remote/models/developer.dart';
 import '../../security/data/remote/models/user.dart';
@@ -20,6 +22,7 @@ class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   Developer? _currentDeveloper;
   ProfileService? profileService;
+  List<Developer>? _currentDevelopers;
 
   JobService? jobService;
   List<Job>? _currentJobs;
@@ -35,10 +38,12 @@ class _MainViewState extends State<MainView> {
   void initalize() async {
     _currentDeveloper = Developer.noArgsConstructor();
     _currentJobs = List.empty();
+    _currentDevelopers = List.empty();
 
     _currentDeveloper = await profileService
         ?.fetchDeveloperProfileByUserId(widget.currentUser.id);
     _currentJobs = await jobService?.fetchAllJobs();
+    _currentDevelopers = await profileService?.featchAllDevelopers();
 
     setState(() {});
   }
@@ -47,11 +52,18 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     final screens = [
       HomeView(
+        user: widget.currentUser,
         developer: _currentDeveloper!,
+      ),
+      NetworkView(
+        user: widget.currentUser,
+        developers: _currentDevelopers!,
       ),
       JobsView(
         jobs: _currentJobs!,
+        developer: _currentDeveloper!,
       ),
+      NotificationsView(),
     ];
 
     return Scaffold(
@@ -69,6 +81,10 @@ class _MainViewState extends State<MainView> {
           NavigationDestination(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.people),
+            label: 'Network',
           ),
           NavigationDestination(
             icon: Icon(Icons.search),

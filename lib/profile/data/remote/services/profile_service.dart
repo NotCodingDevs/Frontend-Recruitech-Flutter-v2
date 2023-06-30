@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ProfileService {
   final String DEVELOPER_ENDPOINT =
-      'http://192.168.241.55:8080/api/v1/developers';
+      'https://app-backend-recruitech-230629033501.azurewebsites.net/api/v1/developers';
 
   Future<dynamic> fetchDeveloperProfileByUserId(int userId) async {
     http.Response response = await http.get(
@@ -65,5 +65,22 @@ class ProfileService {
         },
       ),
     );
+  }
+
+  Future<List<Developer>> featchAllDevelopers() async {
+    http.Response response = await http.get(
+      Uri.parse(DEVELOPER_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return (jsonDecode(response.body)['content'] as List)
+          .map((e) => Developer.fromJson(e))
+          .toList();
+    } else {
+      return throw Exception("Faile to load objets");
+    }
   }
 }

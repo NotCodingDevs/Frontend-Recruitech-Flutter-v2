@@ -11,6 +11,7 @@ class Developer {
   String gender;
   String backgroundPicture;
   String profilePicture;
+  String occupation;
   String location;
   List<Experience> experiences;
   List<Education> educations;
@@ -26,6 +27,7 @@ class Developer {
       required this.backgroundPicture,
       required this.profilePicture,
       required this.location,
+      required this.occupation,
       required this.userId,
       required this.experiences,
       required this.educations});
@@ -38,6 +40,7 @@ class Developer {
         about: json["about"],
         birthDate: json["birthDate"],
         gender: json["gender"],
+        occupation: json['occupation'],
         backgroundPicture: json["backgroundPicture"],
         profilePicture: json["profilePicture"],
         location: json["location"]['locationName'],
@@ -56,6 +59,7 @@ class Developer {
       firstName: "",
       lastName: "",
       about: "",
+      occupation: "",
       gender: "",
       backgroundPicture: '',
       profilePicture: '',

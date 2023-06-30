@@ -60,8 +60,17 @@ class _BackgroundPictureDialogState extends State<BackgroundPictureDialog> {
             ),
             onPressed: () async {
               if (_backgroundPicture != null) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Uploading image...'),
+                ));
+
                 MyFileImage res =
                     await fileService.uploadFile(_backgroundPicture!);
+
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                }
+
                 Navigator.of(context, rootNavigator: true).pop(res.path);
               }
             },

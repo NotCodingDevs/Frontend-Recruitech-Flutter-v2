@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/remote/models/education.dart';
+import '../../../profile/data/remote/models/developer.dart';
 
-class EducationCard extends StatelessWidget {
-  const EducationCard({super.key, required this.education});
+class DeveloperCard extends StatelessWidget {
+  const DeveloperCard({super.key, required this.developer});
 
-  final Education education;
+  final Developer developer;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: Color(0xFFF8FAFB),
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16.0),
+      margin: EdgeInsets.symmetric(vertical: 10),
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 12.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -23,8 +23,10 @@ class EducationCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.network(
-                education.company.profilePicture,
+                developer.profilePicture,
                 height: 64.0,
+                width: 64.0,
+                fit: BoxFit.cover,
               ),
               SizedBox(
                 width: 24.0,
@@ -33,17 +35,20 @@ class EducationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    education.title,
+                    '${developer.firstName} ${developer.lastName}',
                     overflow: TextOverflow.fade,
                     style: TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF465468),
-                      fontSize: 16.0,
+                      color: Color(0xFF0C1E38),
+                      fontSize: 17.0,
                     ),
                   ),
+                  SizedBox(
+                    height: 2.0,
+                  ),
                   Text(
-                    education.company.name,
+                    developer.occupation,
                     style: TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w600,

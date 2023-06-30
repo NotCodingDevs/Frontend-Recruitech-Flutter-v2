@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class AuthService {
-  final String AUTH_ENDPOINT = "http://192.168.241.55:8080/api/v1/auth";
+  final String AUTH_ENDPOINT =
+      "https://app-backend-recruitech-230629033501.azurewebsites.net/api/v1/auth";
 
   Future<dynamic> loginUser(String email, String password) async {
     http.Response response = await http.post(
